@@ -6,7 +6,7 @@ Replication and data update of:
 
 > Henriques, I., & Sadorsky, P. (2008). *Oil prices and the stock prices of alternative energy companies*. **Energy Economics, 30(3), 998–1010.**
 
-This project replicates the paper using an extended dataset through 2026. The analysis examines the relationships among clean-energy stocks, technology stocks, crude oil prices, and short-term interest rates using a VAR framework, Toda–Yamamoto modified Wald tests, and Pesaran–Shin generalized impulse response functions.
+This project replicates the paper using an extended dataset through August 2026. The analysis examines the relationships among clean-energy stocks, technology stocks, crude oil prices, and short-term interest rates using a VAR framework, Toda–Yamamoto modified Wald tests, and Pesaran–Shin generalized impulse response functions.
 
 The project also implements the paper's robustness tests by comparing the technology-stock variable with an orthogonalized technology-stock measure that removes the component explained by the broad stock market.
 
@@ -14,7 +14,7 @@ The project also implements the paper's robustness tests by comparing the techno
 
 ## 1. Research Question
 
-The original paper investigates the relationship between alternative-energy stock prices and several economic and financial variables, particularly:
+The original paper investigates the relationship between alternative-energy stock prices and several economic and financial variables:
 
 - alternative-energy stock prices,
 - technology stock prices,
@@ -57,7 +57,7 @@ The original paper selects:
 - **Maximum order of integration:** $d_{\max} = 2$
 - **Augmented VAR:** $VAR(k+d_{\max}) = VAR(10)$
   
-This project follows the same overall econometric structure but determines these quantities using the updated data.
+This project follows the same econometric structure but determines these quantities using the updated data.
 
 ---
 
@@ -877,7 +877,7 @@ The Toda–Yamamoto tests identify predictive relationships in the time-series s
 
 # 19. Why This Replication?
 
-The original paper studies an important question at the intersection of:
+The original paper studies an important questions of:
 
 - energy economics;
 - financial markets;
@@ -894,9 +894,7 @@ Updating the analysis to 2026 provides an opportunity to examine whether relatio
 - financial markets;
 - the global energy transition.
 
-The purpose of this project is not to force the updated data to reproduce the original results.
-
-Instead, the objective is to **reproduce the original methodology as closely as possible, identify where the updated data produce different results, and understand those differences.**
+The objective is to **reproduce the original methodology as closely as possible, identify where the updated data produce different results, and understand those differences.**
 
 ---
 

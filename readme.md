@@ -2,13 +2,13 @@
 
 ## Oil Prices and the Stock Prices of Alternative Energy Companies
 
-A Python-based replication and data update of:
+Replication and data update of:
 
 > Henriques, I., & Sadorsky, P. (2008). *Oil prices and the stock prices of alternative energy companies*. **Energy Economics, 30(3), 998–1010.**
 
-This project replicates the paper's empirical framework using an extended dataset through 2026. The analysis examines the dynamic relationships among clean-energy stocks, technology stocks, crude oil prices, and short-term interest rates using a VAR framework, Toda–Yamamoto modified Wald tests, and Pesaran–Shin generalized impulse response functions.
+This project replicates the paper using an extended dataset through 2026. The analysis examines the relationships among clean-energy stocks, technology stocks, crude oil prices, and short-term interest rates using a VAR framework, Toda–Yamamoto modified Wald tests, and Pesaran–Shin generalized impulse response functions.
 
-The project also implements the paper's robustness exercise by replacing the technology-stock variable with an orthogonalized technology-stock measure that removes the component explained by the broad stock market.
+The project also implements the paper's robustness tests by comparing the technology-stock variable with an orthogonalized technology-stock measure that removes the component explained by the broad stock market.
 
 ---
 
@@ -25,7 +25,7 @@ The central question motivating this replication is:
 
 > **Do oil prices and technology-stock prices contain predictive information about clean-energy stock prices, and how do shocks to these variables affect clean-energy equities over time?**
 
-The updated replication asks whether the relationships identified in the original early-2000s sample remain present when the analysis is extended to a much longer period.
+The updated replication asks whether the relationships identified in the original early-2000s sample remain present in a longer period.
 
 ---
 
@@ -53,10 +53,10 @@ The original analysis:
 
 The original paper selects:
 
-- VAR lag length: \(k=8\)
-- maximum order of integration: \(d_{max}=2\)
-- augmented VAR: \(VAR(10)\)
-
+- **VAR lag length:** $k = 8$
+- **Maximum order of integration:** $d_{\max} = 2$
+- **Augmented VAR:** $VAR(k+d_{\max}) = VAR(10)$
+  
 This project follows the same overall econometric structure but determines these quantities using the updated data.
 
 ---
@@ -108,21 +108,21 @@ Following Henriques and Sadorsky (2008), natural logarithms are applied to the E
 
 The main transformed variables are therefore:
 
-\[
+$$
 LECO_t = \ln(ECO_t)
-\]
+$$
 
-\[
+$$
 LPSE_t = \ln(PSE_t)
-\]
+$$
 
-\[
+$$
 LOIL_t = \ln(OIL_t)
-\]
+$$
 
-\[
+$$
 LRATE_t = \ln(RATE_t)
-\]
+$$
 
 ### Treasury bill rate adjustment
 
@@ -130,9 +130,9 @@ The extended sample contains seven weekly observations for which the Treasury bi
 
 For the replication, the RATE series was therefore floored at:
 
-\[
+$$
 0.0001
-\]
+$$
 
 before applying the natural logarithm:
 
@@ -158,33 +158,30 @@ The integration properties of the variables are examined using three complementa
 
 #### ADF
 
-\[
-H_0: \text{series contains a unit root}
-\]
-
-\[
-H_1: \text{series is stationary}
-\]
+$$
+\begin{aligned}
+H_0 &: \text{series contains a unit root} \\
+H_1 &: \text{series is stationary}
+\end{aligned}
+$$
 
 #### Phillips–Perron
 
-\[
-H_0: \text{series contains a unit root}
-\]
-
-\[
-H_1: \text{series is stationary}
-\]
+$$
+\begin{aligned}
+H_0 &: \text{series contains a unit root} \\
+H_1 &: \text{series is stationary}
+\end{aligned}
+$$
 
 #### KPSS
 
-\[
-H_0: \text{series is stationary}
-\]
-
-\[
-H_1: \text{series is non-stationary}
-\]
+$$
+\begin{aligned}
+H_0 &: \text{series is stationary} \\
+H_1 &: \text{series is non-stationary}
+\end{aligned}
+$$
 
 ADF and KPSS tests are implemented with an intercept specification. ADF lag selection uses the Schwarz/Bayesian Information Criterion (BIC).
 
@@ -217,13 +214,13 @@ There is **no evidence of an I(2) variable**.
 
 Therefore:
 
-\[
-\boxed{d_{max}=1}
-\]
+$$
+\boxed{d_{\max} = 1}
+$$
 
 is used in the updated analysis.
 
-This differs from the original paper, which uses \(d_{max}=2\).
+This differs from the original paper, which uses $$d_{\max}=2$$.
 
 ---
 
@@ -252,34 +249,34 @@ For each candidate lag:
 
 The LR statistic is calculated as:
 
-\[
+$$
 LR = T
 \left[
 \ln|\hat{\Sigma}_{k-1}|
 -
 \ln|\hat{\Sigma}_{k}|
 \right]
-\]
+$$
 
 where:
 
-- \(T\) is the common effective sample size;
-- \(\hat{\Sigma}_{k-1}\) is the residual covariance matrix from the previous lag;
-- \(\hat{\Sigma}_{k}\) is the residual covariance matrix from the current lag.
+- $T$ is the common effective sample size;
+- $\hat{\Sigma}_{k-1}$ is the residual covariance matrix from the previous lag;
+- $\hat{\Sigma}_{k}$ is the residual covariance matrix from the current lag.
 
 The LR statistic is evaluated against a chi-square distribution with:
 
-\[
+$$
 K^2=4^2=16
-\]
+$$
 
 degrees of freedom.
 
 The significance level is:
 
-\[
+$$
 \alpha=0.05
-\]
+$$
 
 ---
 
@@ -287,9 +284,9 @@ The significance level is:
 
 The sequential LR procedure gives:
 
-\[
+$$
 \boxed{k=9}
-\]
+$$
 
 Therefore, the main model uses nine unrestricted lags.
 
@@ -303,35 +300,35 @@ The Toda–Yamamoto approach avoids requiring pre-testing and differencing of th
 
 The procedure estimates an augmented VAR containing:
 
-\[
-k+d_{max}
-\]
+$$
+k+d_{\max}
+$$
 
 lags.
 
 For the updated main model:
 
-\[
+$$
 k=9
-\]
+$$
 
 and:
 
-\[
-d_{max}=1
-\]
+$$
+d_{\max}=1
+$$
 
 Therefore:
 
-\[
+$$
 9+1=10
-\]
+$$
 
 and the estimated model is:
 
-\[
+$$
 \boxed{VAR(10)}
-\]
+$$
 
 The first nine lags are used in the modified Wald tests, while the additional lag is included to account for the maximum integration order.
 
@@ -345,18 +342,18 @@ Two diagnostic measures are used.
 
 ## 9.1 Adjusted R-squared
 
-Equation-level adjusted \(R^2\) values are reported to describe how much variation in each dependent variable is explained by the estimated lag structure, accounting for the number of parameters.
+Equation-level adjusted $R^2$ values are reported to describe how much variation in each dependent variable is explained by the estimated lag structure, accounting for the number of parameters.
 
 Main-model values:
 
-| Equation | Adjusted \(R^2\) |
+| Equation | Adjusted $R^2$ |
 |---|---:|
 | LECO | 0.991 |
 | LPSE | 0.999 |
 | LOIL | 0.969 |
 | LRATE | 0.932 |
 
-These values indicate substantial in-sample explanatory power, although high \(R^2\) values alone do not establish causal relationships or model adequacy.
+These values indicate substantial in-sample explanatory power, although high $R^2$ values alone do not establish causal relationships or model adequacy.
 
 ## 9.2 Multivariate LM Test
 
@@ -364,15 +361,15 @@ A multivariate Lagrange Multiplier test is used to examine residual serial corre
 
 The null hypothesis is:
 
-\[
+$$
 H_0:\text{no residual serial correlation at lag }h
-\]
+$$
 
 The alternative hypothesis is:
 
-\[
+$$
 H_1:\text{residual serial correlation at lag }h
-\]
+$$
 
 The test is evaluated at the 5% significance level.
 
@@ -402,7 +399,7 @@ The main objective of the causality analysis is to determine whether the lagged 
 
 For example, to test whether oil prices Granger-cause clean-energy stock prices, the following restrictions are imposed in the LECO equation:
 
-\[
+$$
 H_0:
 \beta_{LOIL,1}
 =
@@ -412,17 +409,17 @@ H_0:
 =
 \beta_{LOIL,9}
 =0
-\]
+$$
 
-The tenth lag is not included in the restrictions because it is the additional \(d_{max}\) lag.
+The tenth lag is not included in the restrictions because it is the additional $d_{\max}$ lag.
 
 The modified Wald statistic follows an asymptotic chi-square distribution:
 
-\[
+$$
 \chi^2(9)
-\]
+$$
 
-A rejection of \(H_0\) indicates that the lagged values of the proposed causal variable contain statistically significant predictive information for the dependent variable.
+A rejection of $H_0$ indicates that the lagged values of the proposed causal variable contain statistically significant predictive information for the dependent variable.
 
 The procedure is repeated for all 12 possible directional relationships among the four variables.
 
@@ -441,9 +438,9 @@ The main-model Wald statistics are:
 
 Significance levels:
 
-- `***` \(p<0.01\)
-- `**` \(p<0.05\)
-- `*` \(p<0.10\)
+- `***` $p<0.01$
+- `**` $p<0.05$
+- `*` $p<0.10$
 
 At the 5% level, the updated sample provides evidence of predictive relationships including:
 
@@ -465,9 +462,9 @@ Granger-causality tests identify predictive relationships, but they do not show 
 
 To examine dynamic responses, the project calculates **Pesaran–Shin generalized impulse response functions (GIRFs)**.
 
-The generalized impulse response to a one-standard-deviation innovation in variable \(j\) is calculated as:
+The generalized impulse response to a one-standard-deviation innovation in variable $j$ is calculated as:
 
-\[
+$$
 GIRF_j(h)
 =
 \frac{
@@ -475,22 +472,22 @@ GIRF_j(h)
 }{
 \sqrt{\sigma_{jj}}
 }
-\]
+$$
 
 where:
 
-- \(\Phi_h\) is the moving-average coefficient matrix at horizon \(h\);
-- \(\Sigma\) is the VAR residual covariance matrix;
-- \(e_j\) selects the shocked variable;
-- \(\sigma_{jj}\) is the variance of the innovation.
+- $\Phi_h$ is the moving-average coefficient matrix at horizon $h$;
+- $\Sigma$ is the VAR residual covariance matrix;
+- $e_j$ selects the shocked variable;
+- $\sigma_{jj}$ is the variance of the innovation.
 
 Unlike orthogonalized impulse responses, generalized impulse responses do not require a particular ordering of the variables.
 
 The responses are calculated over a:
 
-\[
+$$
 \boxed{10\text{-week horizon}}
-\]
+$$
 
 ---
 
@@ -527,7 +524,7 @@ The S&P 500 is introduced as the broad-market control variable.
 
 First, the following regression is estimated:
 
-\[
+$$
 LPSE_t
 =
 \alpha
@@ -535,13 +532,13 @@ LPSE_t
 \beta LSP500_t
 +
 \epsilon_t
-\]
+$$
 
 The residual:
 
-\[
+$$
 LOTECH_t=\hat{\epsilon}_t
-\]
+$$
 
 is used as the orthogonalized technology-stock variable.
 
@@ -564,9 +561,9 @@ LOTECH is found to be non-stationary in levels but stationary after first differ
 
 Therefore:
 
-\[
-d_{max}=1
-\]
+$$
+d_{\max}=1
+$$
 
 remains appropriate for the robustness specification.
 
@@ -578,21 +575,21 @@ For comparability and to avoid an excessively parameterized robustness VAR, the 
 
 The sequential LR procedure selects:
 
-\[
+$$
 \boxed{k=12}
-\]
+$$
 
 The robustness model therefore contains:
 
-\[
+$$
 12+1=13
-\]
+$$
 
 lags:
 
-\[
+$$
 \boxed{VAR(13)}
-\]
+$$
 
 The 12-lag maximum is a modelling choice for the robustness specification and is disclosed rather than presented as an unconstrained global optimum.
 
@@ -602,7 +599,7 @@ The 12-lag maximum is a modelling choice for the robustness specification and is
 
 The robustness model produces:
 
-| Equation | Adjusted \(R^2\) |
+| Equation | Adjusted $R^2$ |
 |---|---:|
 | LECO | 0.991 |
 | LOTECH | 0.990 |
@@ -634,17 +631,17 @@ The robustness Wald statistics are:
 
 A key result is:
 
-\[
+$$
 \boxed{LOTECH \rightarrow LECO,\quad p=0.0495}
-\]
+$$
 
 The orthogonalized technology-stock variable significantly predicts clean-energy stock prices at the 5% level.
 
 By comparison, in the main model:
 
-\[
+$$
 LPSE \rightarrow LECO,\quad p=0.6076
-\]
+$$
 
 This suggests that the technology-specific component of technology-stock prices has predictive content for clean-energy equities even after removing the component associated with broad market movements.
 
@@ -670,9 +667,9 @@ Oil prices appear more relevant to clean-energy equities in the updated sample t
 
 The main TY test finds:
 
-\[
+$$
 LOIL \rightarrow LECO
-\]
+$$
 
 at the 10% level, while the robustness specification finds the relationship significant at the 5% level.
 
@@ -703,8 +700,8 @@ This project should be understood as a **data-updated replication**, rather than
 | Interest rate | 3-month T-bill | 3-month T-bill |
 | Unit-root tests | ADF, PP, KPSS | ADF, PP, KPSS |
 | Lag selection | LR procedure | LR procedure |
-| \(k\) | 8 | 9 |
-| \(d_{max}\) | 2 | 1 |
+| $k$ | 8 | 9 |
+| $d_{\max}$ | 2 | 1 |
 | Augmented VAR | VAR(10) | VAR(10) |
 | GIRF | Pesaran–Shin | Pesaran–Shin |
 | GIRF SEs | Analytical | Recursive residual bootstrap |
@@ -816,9 +813,9 @@ Implements:
 
 Implements the orthogonalized technology-stock variable:
 
-\[
+$$
 LOTECH = LPSE-\widehat{LPSE}
-\]
+$$
 
 where predicted technology-stock prices are obtained from the S&P 500 regression.
 
@@ -831,7 +828,7 @@ To reproduce the analysis:
 ### 1. Clone the repository
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/rshecon/Henriques-Sadorsky-2008-Extension
 cd Henriques-and-Sadorsky-replication
 ```
 
@@ -878,11 +875,11 @@ Seven zero or slightly negative RATE observations required a positive floor befo
 
 The updated unit-root tests provide no evidence of I(2) variables, resulting in:
 
-\[
-d_{max}=1
-\]
+$$
+d_{\max}=1
+$$
 
-rather than the \(d_{max}=2\) used by the original paper.
+rather than the $d_{\max}=2$ used by the original paper.
 
 ### 4. GIRF uncertainty bands
 
@@ -900,7 +897,7 @@ The Toda–Yamamoto tests identify predictive relationships in the time-series s
 
 # 19. Why This Replication?
 
-The original paper studies an important question at the intersection of:
+The original paper studies an important question for:
 
 - energy economics;
 - financial markets;

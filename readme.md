@@ -249,11 +249,10 @@ For each candidate lag:
 
 The LR statistic is calculated as:
 
-$$
-LR = T
+$$LR = T
 \left[
 \ln|\hat{\Sigma}_{k-1}|
--
+
 \ln|\hat{\Sigma}_{k}|
 \right]
 $$
@@ -399,17 +398,7 @@ The main objective of the causality analysis is to determine whether the lagged 
 
 For example, to test whether oil prices Granger-cause clean-energy stock prices, the following restrictions are imposed in the LECO equation:
 
-$$
-H_0:
-\beta_{LOIL,1}
-=
-\beta_{LOIL,2}
-=
-...
-=
-\beta_{LOIL,9}
-=0
-$$
+$$ H_0:\quad \beta_{LOIL,1} = \beta_{LOIL,2} = \cdots = \beta_{LOIL,9} = 0 $$
 
 The tenth lag is not included in the restrictions because it is the additional $d_{\max}$ lag.
 
@@ -464,15 +453,7 @@ To examine dynamic responses, the project calculates **Pesaran–Shin generalize
 
 The generalized impulse response to a one-standard-deviation innovation in variable $j$ is calculated as:
 
-$$
-GIRF_j(h)
-=
-\frac{
-\Phi_h\Sigma e_j
-}{
-\sqrt{\sigma_{jj}}
-}
-$$
+$$GIRF_j(h)=\frac{\Phi_h\Sigma e_j}{\sqrt{\sigma_{jj}}}$$
 
 where:
 
@@ -526,7 +507,6 @@ First, the following regression is estimated:
 
 $$
 LPSE_t
-=
 \alpha
 +
 \beta LSP500_t

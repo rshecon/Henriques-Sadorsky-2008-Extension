@@ -525,7 +525,7 @@ The S&P 500 is introduced as the broad-market control variable.
 First, the following regression is estimated:
 
 $$
-\LPSE_t
+LPSE_t
 =
 \alpha
 +
@@ -828,7 +828,7 @@ To reproduce the analysis:
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/rshecon/Henriques-Sadorsky-2008-Extension
+git clone <repository-url>
 cd Henriques-and-Sadorsky-replication
 ```
 
@@ -897,7 +897,7 @@ The Toda–Yamamoto tests identify predictive relationships in the time-series s
 
 # 19. Why This Replication?
 
-The original paper studies an important question for:
+The original paper studies an important question at the intersection of:
 
 - energy economics;
 - financial markets;

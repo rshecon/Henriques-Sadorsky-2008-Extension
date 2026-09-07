@@ -525,7 +525,7 @@ The S&P 500 is introduced as the broad-market control variable.
 First, the following regression is estimated:
 
 $$
-LPSE_t
+\LPSE_t
 =
 \alpha
 +

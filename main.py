@@ -1,6 +1,8 @@
 import os
 from statsmodels.tsa.api import VAR
 from src.data import clean_data
+from src.summary_stats import sum_stats
+from src.multifactor_model import multifactor_model
 from src.transform import transform_data
 from src.tests import unit_root_test
 from src.var_model import optimal_lags
@@ -14,6 +16,8 @@ def main():
     raw_path=os.path.join('data','raw','ECO_2004-2026.csv')
     cleaned_path=os.path.join('data', 'cleaned', 'wed_data.csv')
     log_path=os.path.join('data', 'cleaned', 'log_data.csv')
+    summary_stats_path=os.path.join('results','summary_stats.csv')
+    mf_path=os.path.join('results','mf.csv')
     unit_test_path=os.path.join('results','unit_root_tests.csv')
     lag_selection_path=os.path.join('results','lag_selection.csv')
     stat_path=os.path.join('results', 'stat_table.csv')
@@ -30,6 +34,10 @@ def main():
     #Clean and combine data
     cleaned_df=clean_data(raw_path, cleaned_path)
     print('Cleaned Wednesday data saved.')
+
+    #Summary statistics
+    sum_stats(cleaned_df, summary_stats_path)
+    multifactor_model(cleaned_df, mf_path)
 
     #Log transformation
     log_df= transform_data(cleaned_df, log_path)
